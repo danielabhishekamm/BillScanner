@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chhaya_pc.billscanner.ExpenditureDetailsLayout">
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/entertainment_barchart"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="15dp"/>
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/travel_barchart"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_below="@+id/entertainment_barchart"
+        android:layout_marginTop="15dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/food_barchart"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_below="@+id/travel_barchart"
+        android:layout_marginTop="25dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/shopping_barchart"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_below="@+id/food_barchart"
+        android:layout_marginTop="25dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/medicine_barchart"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_below="@+id/shopping_barchart"
+        android:layout_marginTop="25dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/miscallaneous_barchart"
+        android:layout_width="600dp"
+        android:layout_height="400dp"
+        android:layout_below="@+id/medicine_barchart"
+        android:layout_marginTop="25dp"/>
+</RelativeLayout>
+</ScrollView>
+
+</RelativeLayout>

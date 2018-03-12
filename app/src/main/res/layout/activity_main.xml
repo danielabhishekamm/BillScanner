@@ -5,51 +5,204 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.chhaya_pc.billscanner.MainActivity">
-
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_alignParentStart="true"
       android:layout_centerVertical="true"
-      android:background="#ffdddd">
+      android:background="#879cbc">
 
     <RelativeLayout
+        android:layout_width="550dp"
+        android:layout_height="400dp"
+        android:padding="20dp"
+        android:id="@+id/pie_chart_layout"
+        android:gravity="center">
+      <com.github.mikephil.charting.charts.PieChart
+          android:id="@+id/piechart"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/monthly_layout"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
+        android:layout_below="@+id/pie_chart_layout"
+        android:layout_marginTop="16dp"
         android:background="#fff"
-        android:id="@+id/monthly_layout">
+        android:padding="20dp">
 
       <TextView
           android:id="@+id/monthly_header"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="20dp"
           android:layout_marginStart="15dp"
-          android:text="Expenses this month: "
-          android:textSize="25dp"
-          />
+          android:layout_marginTop="20dp"
+          android:text="Monthly Income"
+          android:textSize="25dp" />
+
       <TextView
+          android:id="@+id/monthly_income"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_below="@id/monthly_header"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="15dp"
           android:text="\u20B9 4899"
           android:textColor="#37be40"
-          android:layout_marginTop="15dp"
-          android:layout_centerHorizontal="true"
           android:textSize="30dp"
-          android:layout_below="@id/monthly_header"/>
+          android:visibility="gone" />
+
+      <ImageView
+          android:id="@+id/edit_monthly_income"
+          android:layout_width="30dp"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_alignTop="@+id/monthly_header"
+          android:layout_marginTop="20dp"
+          android:src="@drawable/ic_edit"
+          android:textSize="20dp"
+          android:textStyle="italic"
+          android:visibility="gone" />
+
+      <EditText
+          android:id="@+id/add_monthly_income"
+          android:layout_width="225dp"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/monthly_header"
+          android:layout_centerHorizontal="true"
+          android:hint="Enter monthly income here"
+          android:inputType="numberDecimal"
+          android:textAlignment="center" />
+
+      <TextView
+          android:id="@+id/submit_income"
+          android:layout_width="50dp"
+          android:layout_height="wrap_content"
+          android:layout_alignBaseline="@+id/add_monthly_income"
+          android:layout_alignBottom="@+id/add_monthly_income"
+          android:layout_marginStart="12dp"
+          android:layout_toEndOf="@+id/add_monthly_income"
+          android:text="Submit"
+          android:textColor="#6384f2" />
+
+    </RelativeLayout>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/pledgelayout"
+      android:layout_below="@id/monthly_layout"
+      android:layout_marginTop="17dp"
+      android:padding="20dp"
+      android:background="#fff">
+
+    <TextView
+        android:id="@+id/pledgeheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Maximum limit per month"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/pledgeamountedittext"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pledgeheader"
+        android:layout_centerHorizontal="true"
+        android:hint="Enter maximum limit here"
+        android:inputType="numberDecimal"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/submitpledge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pledgeamountedittext"
+        android:layout_alignBottom="@+id/pledgeamountedittext"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:text="Submit"
+        android:textColor="#6384f2" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pledgeamounttextview"
+        android:layout_below="@id/pledgeheader"
+        android:layout_centerHorizontal="true"
+        android:textColor="#37be40"
+        android:textSize="30dp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/edit_pledge"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_edit"
+        android:visibility="gone"/>
+
+  </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/move_to_fixed_spends"
+    android:layout_below="@id/pledgelayout"
+    android:layout_marginTop="17dp"
+    android:background="#fff">
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:padding="20dp"
+      android:text="Tell us about your fixed spends so you won't have to scan them every month."
+      android:textStyle="italic"
+      android:textColor="#4879a4"
+      android:id="@+id/move_to_fixed_spends_text"/>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/last_bill_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#6384f2"
+        android:id="@+id/expenditure_layout">
+
+      <TextView
+          android:id="@+id/total_monthly_spends"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+
+          android:gravity="center"
+          android:padding="20dp"
+          android:text="YOUR EXPENDITURE DETAILS "
+          android:textColor="#fff"
+          android:textSize="15dp"
+          android:textStyle="bold"/>
+
+
+
+
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/last_bill_layout"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_below="@+id/monthly_layout"
-        android:layout_centerHorizontal="true"
+        android:layout_height="140dp"
+        android:layout_below="@id/move_to_fixed_spends"
         android:layout_marginTop="17dp"
-        android:background="#fff"
-        android:id="@+id/last_bill_layout">
+        android:background="#fff">
 
       <TextView
           android:id="@+id/last_bill"
@@ -57,7 +210,7 @@
           android:layout_height="wrap_content"
           android:layout_marginStart="15dp"
           android:layout_marginTop="20dp"
-          android:text="Last Bill: "
+          android:text="Last Scanned Bill"
           android:textSize="25dp" />
 
       <TextView
@@ -70,81 +223,48 @@
           android:text="\u20B9 0"
           android:textColor="#37be40"
           android:textSize="30dp" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/last_bill_value"
+          android:layout_marginTop="7dp"
+          android:text="Spent on: "
+          android:id="@+id/last_bill_category"
+          android:layout_centerHorizontal="true"/>
+
+
     </RelativeLayout>
-
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_below="@+id/last_bill_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="#fff">
-
-      <TextView
-          android:id="@+id/setMax"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
-          android:layout_alignParentTop="true"
-          android:layout_marginTop="20dp"
-          android:layout_marginStart="15dp"
-          android:text="Maximum limit per month: "
-          android:textSize="25dp" />
-
-      <TextView
-
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/setMax"
-          android:layout_centerHorizontal="true"
-          android:text="\u20B9 0.00"
-          android:textColor="#37be40"
-          android:textSize="30dp"
-          android:id="@+id/maxMonthValue" />
-
-
-      <TextView
-          android:id="@+id/setMaxTextView"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentStart="true"
-          android:layout_below="@+id/maxMonthValue"
-          android:layout_marginStart="25dp"
-          android:text="Set Max. limit per month"
-          android:textStyle="italic"
-          android:textColor="#6384f2"/>
-
-      <EditText
-          android:id="@+id/setMaxEditText"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignStart="@+id/setMaxTextView"
-          android:layout_below="@+id/setMaxTextView"
-          android:hint="Enter limit in INR"
-          android:visibility="gone"
-          android:inputType="numberDecimal"/>
-
-      <Button
-          android:id="@+id/setMaxSubmit"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignTop="@+id/setMaxEditText"
-          android:layout_marginStart="11dp"
-          android:layout_toEndOf="@+id/setMaxTextView"
-          android:background="#6384f2"
-          android:text="OK"
-          android:visibility="gone"/>
+        android:layout_height="300dp"
+        android:padding="20dp"
+        android:id="@+id/line_chart_layout"
+        android:gravity="center"
+        android:layout_below="@id/expenditure_layout"
+        android:background="#fff"
+        android:layout_marginTop="10dp">
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/linechart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </RelativeLayout>
 
-
-    <Button
-        android:id="@+id/cam_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#6384f2"
-        android:text="Scan new Bill"
-        android:textColor="#ffffff" />
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="70dp"
+          android:layout_below="@id/line_chart_layout"></RelativeLayout>
   </RelativeLayout>
+
+</ScrollView>
+
+  <Button
+      android:id="@+id/cam_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="#6384f2"
+      android:text="Scan new Bill"
+      android:textColor="#ffffff" />
+
+
 </RelativeLayout>

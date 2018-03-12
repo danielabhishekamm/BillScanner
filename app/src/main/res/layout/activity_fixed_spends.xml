@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chhaya_pc.billscanner.FixedSpendsActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fixedspendslayout"
+        android:layout_below="@id/pledgelayout"
+        android:layout_marginTop="17dp"
+        android:layout_marginStart="15dp"
+        android:background="#fff"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tell us what fixed spends you have this month"
+            android:textSize="20dp"
+            android:id="@+id/fixedspendsheader"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fixedspendsheader"
+            android:id="@+id/house_rent_layout"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/houserent_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/houserent"
+                android:layout_alignBottom="@+id/houserent"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:text="House Rent"
+                android:visibility="gone"
+                android:textSize="19dp"/>
+
+            <EditText
+                android:id="@+id/houserent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="73dp"
+                android:layout_toStartOf="@+id/submit_house_rent"
+                android:hint="Enter house rent"
+                android:inputType="numberDecimal"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/houserent"
+                android:layout_alignBottom="@+id/houserent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="57dp"
+                android:text="Submit"
+                android:id="@+id/submit_house_rent"
+                android:textSize="15dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"
+                android:layout_toRightOf="@id/houserent_textview"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:id="@+id/houserent_edit"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/house_rent_layout"
+            android:id="@+id/milk_layout"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/milk_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/milkamount"
+                android:layout_alignBottom="@+id/milkamount"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:text="Milk"
+                android:visibility="gone"
+                android:textSize="19dp"/>
+
+            <EditText
+                android:id="@+id/milkamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="65dp"
+                android:layout_toStartOf="@+id/submit_milk_amount"
+                android:hint="Enter milk amount"
+                android:inputType="numberDecimal"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/milkamount"
+                android:layout_alignBottom="@+id/milkamount"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="57dp"
+                android:text="Submit"
+                android:id="@+id/submit_milk_amount"
+                android:textSize="15dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"
+                android:layout_toRightOf="@id/milk_textview"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:id="@+id/milk_edit"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/milk_layout"
+            android:id="@+id/newspaper_layout"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/newspaper_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/newspaper_amount"
+                android:layout_alignBottom="@+id/newspaper_amount"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:text="News Paper"
+                android:visibility="gone"
+                android:textSize="19dp"/>
+
+            <EditText
+                android:id="@+id/newspaper_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="47dp"
+                android:layout_toStartOf="@+id/submit_newspaper_amount"
+                android:hint="Enter newspaper amount"
+                android:inputType="numberDecimal"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/newspaper_amount"
+                android:layout_alignBottom="@+id/newspaper_amount"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="57dp"
+                android:text="Submit"
+                android:id="@+id/submit_newspaper_amount"
+                android:textSize="15dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"
+                android:layout_toRightOf="@id/newspaper_textview"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:id="@+id/newspaper_edit"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/newspaper_layout"
+            android:id="@+id/electricity_layout"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/electricity_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/electricity_amount"
+                android:layout_alignBottom="@+id/electricity_amount"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:text="Electricity"
+                android:visibility="gone"
+                android:textSize="19dp"/>
+
+            <EditText
+                android:id="@+id/electricity_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="47dp"
+                android:layout_toStartOf="@+id/submit_electricity_amount"
+                android:hint="Enter electricity amount"
+                android:inputType="numberDecimal"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/electricity_amount"
+                android:layout_alignBottom="@+id/electricity_amount"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="57dp"
+                android:text="Submit"
+                android:id="@+id/submit_electricity_amount"
+                android:textSize="15dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"
+                android:layout_toRightOf="@id/electricity_textview"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:id="@+id/electricity_edit"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/electricity_layout"
+            android:id="@+id/other_layout"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/other_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/other_amount"
+                android:layout_alignBottom="@+id/other_amount"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:text="Other Fixed Spends"
+                android:visibility="gone"
+                android:textSize="19dp"/>
+
+            <EditText
+                android:id="@+id/other_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="47dp"
+                android:layout_toStartOf="@+id/submit_other_amount"
+                android:hint="Enter other fixed amount"
+                android:inputType="numberDecimal"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/other_amount"
+                android:layout_alignBottom="@+id/other_amount"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="57dp"
+                android:text="Submit"
+                android:id="@+id/submit_other_amount"
+                android:textSize="15dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"
+                android:layout_toRightOf="@id/other_textview"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"
+                android:id="@+id/other_edit"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
