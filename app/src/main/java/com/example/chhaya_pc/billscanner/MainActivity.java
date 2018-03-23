@@ -419,14 +419,48 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     day8spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("9") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("09")) {
                     day9spends += Float.parseFloat(beansList.get(i).getAmount());
-                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10")) {
                     day10spends += Float.parseFloat(beansList.get(i).getAmount());
-                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("11") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("11")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("11")) {
                     day11spends += Float.parseFloat(beansList.get(i).getAmount());
-                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("12") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("12")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("12")) {
                     day12spends += Float.parseFloat(beansList.get(i).getAmount());
-                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("13") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("13")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("13")) {
                     day13spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("14")) {
+                    day14spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("15")) {
+                    day15spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("16")) {
+                    day16spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("17")) {
+                    day17spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("18")) {
+                    day18spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("19")) {
+                    day19spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("20")) {
+                    day20spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("21")) {
+                    day21spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("22")) {
+                    day22spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("23")) {
+                    day23spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("24")) {
+                    day24spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("25")) {
+                    day25spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("26")) {
+                    day26spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("27")) {
+                    day27spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("28")) {
+                    day28spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("29")) {
+                    day29spends += Float.parseFloat(beansList.get(i).getAmount());
+                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("30")) {
+                    day30spends += Float.parseFloat(beansList.get(i).getAmount());
                 }
             }
         }
@@ -460,6 +494,36 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
         listOfDailySpendsAccumulative.add(day14spends);
         day15spends += day14spends;
         listOfDailySpendsAccumulative.add(day15spends);
+        day16spends += day15spends;
+        listOfDailySpendsAccumulative.add(day16spends);
+        day17spends += day16spends;
+        listOfDailySpendsAccumulative.add(day17spends);
+        day18spends += day17spends;
+        listOfDailySpendsAccumulative.add(day18spends);
+        day19spends += day18spends;
+        listOfDailySpendsAccumulative.add(day19spends);
+        day20spends += day19spends;
+        listOfDailySpendsAccumulative.add(day20spends);
+        day21spends += day20spends;
+        listOfDailySpendsAccumulative.add(day21spends);
+        day22spends += day21spends;
+        listOfDailySpendsAccumulative.add(day22spends);
+        day23spends += day22spends;
+        listOfDailySpendsAccumulative.add(day23spends);
+        day24spends += day23spends;
+        listOfDailySpendsAccumulative.add(day24spends);
+        day25spends += day24spends;
+        listOfDailySpendsAccumulative.add(day25spends);
+        day26spends += day25spends;
+        listOfDailySpendsAccumulative.add(day26spends);
+        day27spends += day26spends;
+        listOfDailySpendsAccumulative.add(day27spends);
+        day28spends += day27spends;
+        listOfDailySpendsAccumulative.add(day28spends);
+        day29spends += day28spends;
+        listOfDailySpendsAccumulative.add(day29spends);
+        day30spends += day29spends;
+        listOfDailySpendsAccumulative.add(day30spends);
 
         ArrayList<Entry> yVals = new ArrayList<Entry>();
          float total = 0f;

@@ -11,27 +11,33 @@
         android:roundIcon="@drawable/billscanner_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".CamActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CamActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity android:name=".FixedSpendsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SpendDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ExpenditureDetailsLayout"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".FixedSpendsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpendDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ExpenditureDetailsLayout"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MonthlyDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -28,7 +28,7 @@ public class SpendDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spend_details);
 
         yearlyLayout=(RelativeLayout)findViewById(R.id.yearly_spends_layout);
-        monthlyLayout=(RelativeLayout)findViewById(R.id.monthly_layout);
+        monthlyLayout=(RelativeLayout)findViewById(R.id.monthly_spends_layout);
         weeklyLayout=(RelativeLayout)findViewById(R.id.weekly_spends_layout);
         toodayLayout=(RelativeLayout)findViewById(R.id.todays_spends_layout);
 
@@ -83,6 +83,35 @@ public class SpendDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(SpendDetailsActivity.this, ExpenditureDetailsLayout.class);
                 startActivity(intent);
             }
+        });
+
+        monthlyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SpendDetailsActivity.this, MonthlyDetailsActivity.class);
+                intent.putExtra("origin","monthly");
+                startActivity(intent);
+            }
+        });
+
+        weeklyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent intent = new Intent(SpendDetailsActivity.this, MonthlyDetailsActivity.class);
+                    intent.putExtra("origin","weekly");
+                    startActivity(intent);
+                }
+
+        });
+
+        toodayLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SpendDetailsActivity.this, MonthlyDetailsActivity.class);
+                intent.putExtra("origin","daily");
+                startActivity(intent);
+            }
+
         });
 
     }

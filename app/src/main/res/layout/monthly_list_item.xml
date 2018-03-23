@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:padding="10dp"
+    android:background="#fff">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:src="@drawable/food"
+        android:id="@+id/category_label"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cat_name"
+        android:text="Food"
+        android:layout_below="@id/category_label"/>
+
+    <TextView
+        android:id="@+id/entered_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/entered_date"
+        android:layout_marginEnd="26dp"
+        android:layout_toStartOf="@+id/entered_date"
+        android:text="Amount: ₹ 250" />
+
+    <TextView
+        android:id="@+id/entered_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cat_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:text="Entered on: 21/08/2017" />
+    </RelativeLayout>
+</RelativeLayout>
+
+
