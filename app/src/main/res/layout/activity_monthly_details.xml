@@ -12,4 +12,14 @@
         android:layout_height="match_parent"
         android:id="@+id/monthlysalesList">
     </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:id="@+id/empty_list_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+
+        android:text="Nothing to show here!"
+        android:textSize="20dp"
+        android:visibility="gone"/>
 </RelativeLayout>

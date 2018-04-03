@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +38,9 @@
         <activity
             android:name=".ExpenditureDetailsLayout"
             android:screenOrientation="portrait" />
-        <activity android:name=".MonthlyDetailsActivity"></activity>
+        <activity android:name=".MonthlyDetailsActivity" />
+        <activity android:name=".SearchByDateActivity" />
+        <activity android:name=".ContactsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,406 +1,440 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.chhaya_pc.billscanner.MainActivity">
-<ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_alignParentStart="true"
-      android:layout_centerVertical="true"
-      android:background="#879cbc">
 
-    <RelativeLayout
-        android:layout_width="550dp"
-        android:layout_height="400dp"
-        android:padding="20dp"
-        android:id="@+id/pie_chart_layout"
-        android:gravity="center">
-      <com.github.mikephil.charting.charts.PieChart
-          android:id="@+id/piechart"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
-    </RelativeLayout>
-
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:padding="20dp"
-          android:id="@+id/pie_color_match"
-          android:layout_below="@id/pie_chart_layout"
-          >
-          <ImageView
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:background="#ff4e77"
-              android:id="@+id/entertainment_pink"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginStart="19dp"
-              android:layout_toEndOf="@+id/entertainment_pink"
-              android:text="Entertainment &amp; Leisure"
-              android:id="@+id/textView" />
-          <ImageView
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:background="#ff8222"
-              android:id="@+id/travel_orange"
-              android:layout_marginTop="20dp"
-              android:layout_below="@id/entertainment_pink"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignStart="@+id/textView"
-              android:layout_alignTop="@+id/travel_orange"
-              android:text="Travel"
-              android:id="@+id/textView1"/>
-          <ImageView
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:background="#ffe100"
-              android:id="@+id/food_yellow"
-              android:layout_marginTop="20dp"
-              android:layout_below="@id/travel_orange"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignStart="@+id/textView1"
-              android:layout_alignTop="@id/food_yellow"
-              android:text="Food"
-              android:id="@+id/textView2"/>
-          <ImageView
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:background="#5d9f5c"
-              android:id="@+id/shopping_green"
-              android:layout_marginTop="20dp"
-              android:layout_below="@id/food_yellow"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignStart="@+id/textView2"
-              android:layout_alignTop="@id/shopping_green"
-              android:text="Shopping"
-              android:id="@+id/textView3"/>
-          <ImageView
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:background="#30e6df"
-              android:id="@+id/medicine_blue"
-              android:layout_marginTop="20dp"
-              android:layout_below="@id/shopping_green"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignStart="@+id/textView3"
-              android:layout_alignTop="@id/medicine_blue"
-              android:text="Medicine"
-              android:id="@+id/textView4"/>
-          <ImageView
-          android:layout_width="10dp"
-          android:layout_height="10dp"
-          android:background="#e6304e"
-          android:id="@+id/miscellaneous_pink"
-          android:layout_marginTop="20dp"
-          android:layout_below="@id/medicine_blue"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignStart="@+id/textView4"
-              android:layout_alignTop="@id/miscellaneous_pink"
-              android:text="Miscellaneous"
-              android:id="@+id/textView5"/>
-          <ImageView
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:background="#ef9f1e"
-              android:id="@+id/fixed_orange"
-              android:layout_marginTop="20dp"
-              android:layout_below="@id/miscellaneous_pink"/>
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignStart="@+id/textView5"
-              android:layout_alignTop="@id/fixed_orange"
-              android:text="Fixed Bills" />
-
-      </RelativeLayout>
-
-
-
-    <RelativeLayout
-        android:id="@+id/monthly_layout"
+    <include
+        layout="@layout/app_bar_test"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/pie_color_match"
-        android:layout_marginTop="16dp"
-        android:background="#fff"
-        android:padding="20dp">
+        android:layout_height="match_parent" />
 
-      <TextView
-          android:id="@+id/monthly_header"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="15dp"
-          android:layout_marginTop="20dp"
-          android:text="Monthly Income"
-          android:textSize="25dp" />
-
-      <TextView
-          android:id="@+id/monthly_income"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/monthly_header"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="15dp"
-          android:text="\u20B9 4899"
-          android:textColor="#37be40"
-          android:textSize="30dp"
-          android:visibility="gone" />
-
-      <ImageView
-          android:id="@+id/edit_monthly_income"
-          android:layout_width="30dp"
-          android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
-          android:layout_alignTop="@+id/monthly_header"
-          android:layout_marginTop="20dp"
-          android:src="@drawable/ic_edit"
-          android:textSize="20dp"
-          android:textStyle="italic"
-          android:visibility="gone" />
-
-      <EditText
-          android:id="@+id/add_monthly_income"
-          android:layout_width="225dp"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/monthly_header"
-          android:layout_centerHorizontal="true"
-          android:hint="Enter monthly income here"
-          android:inputType="numberDecimal"
-          android:textAlignment="center" />
-
-      <TextView
-          android:id="@+id/submit_income"
-          android:layout_width="50dp"
-          android:layout_height="wrap_content"
-          android:layout_alignBaseline="@+id/add_monthly_income"
-          android:layout_alignBottom="@+id/add_monthly_income"
-          android:layout_marginStart="12dp"
-          android:layout_toEndOf="@+id/add_monthly_income"
-          android:text="Submit"
-          android:textColor="#6384f2" />
-
-    </RelativeLayout>
-
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/pledgelayout"
-      android:layout_below="@id/monthly_layout"
-      android:layout_marginTop="17dp"
-      android:padding="20dp"
-      android:background="#fff">
-
-    <TextView
-        android:id="@+id/pledgeheader"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="Maximum limit per month"
-        android:textSize="25dp" />
+        android:layout_marginTop="?attr/actionBarSize">
 
-    <EditText
-        android:id="@+id/pledgeamountedittext"
-        android:layout_width="225dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pledgeheader"
-        android:layout_centerHorizontal="true"
-        android:hint="Enter maximum limit here"
-        android:inputType="numberDecimal"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/submitpledge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/pledgeamountedittext"
-        android:layout_alignBottom="@+id/pledgeamountedittext"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="14dp"
-        android:text="Submit"
-        android:textColor="#6384f2" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pledgeamounttextview"
-        android:layout_below="@id/pledgeheader"
-        android:layout_centerHorizontal="true"
-        android:textColor="#37be40"
-        android:textSize="30dp"
-        android:visibility="gone"/>
-
-    <ImageView
-        android:id="@+id/edit_pledge"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_edit"
-        android:visibility="gone"/>
-
-  </RelativeLayout>
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/move_to_fixed_spends"
-    android:layout_below="@id/pledgelayout"
-    android:layout_marginTop="17dp"
-    android:background="#fff"
-    android:padding="10dp">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/check_fixed_button">
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:padding="20dp"
-      android:text="Fixed Bills"
-      android:textSize="25dp"
-      android:id="@+id/move_to_fixed_spends_text"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tell us about your fixed monthly expenses. We will notify you every month so you'll never forget."
-        android:textColor="#4879a4"
-        android:layout_below="@id/move_to_fixed_spends_text"
-        android:layout_marginTop="15dp"
-        />
-    </RelativeLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#6bbe56"
-        android:text="Check my Fixed Bills"
-        android:textColor="#fff"
-        android:id="@+id/check_fixed_button"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"/>
-</RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/last_bill_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="#6384f2"
-        android:id="@+id/expenditure_layout">
-
-      <TextView
-          android:id="@+id/total_monthly_spends"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentStart="true"
-          android:layout_alignParentTop="true"
-
-          android:gravity="center"
-          android:padding="20dp"
-          android:text="YOUR EXPENDITURE DETAILS "
-          android:textColor="#fff"
-          android:textSize="15dp"
-          android:textStyle="bold"/>
-
-
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/last_bill_layout"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_below="@id/move_to_fixed_spends"
-        android:layout_marginTop="17dp"
-        android:background="#fff">
-
-      <TextView
-          android:id="@+id/last_bill"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="15dp"
-          android:layout_marginTop="20dp"
-          android:text="Last Scanned Bill"
-          android:textSize="25dp" />
-
-      <TextView
-          android:id="@+id/last_bill_value"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/last_bill"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="15dp"
-          android:text="₹ 0"
-          android:textColor="#37be40"
-          android:textSize="30dp" />
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/last_bill_value"
-          android:layout_marginTop="7dp"
-          android:text="Spent on: "
-          android:id="@+id/last_bill_category"
-          android:layout_centerHorizontal="true"/>
-
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:padding="20dp"
-        android:id="@+id/line_chart_layout"
-        android:gravity="center"
-        android:layout_below="@id/expenditure_layout"
-        android:background="#fff"
-        android:layout_marginTop="10dp">
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/linechart"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="#879cbc">
+
+            <RelativeLayout
+                android:id="@+id/pie_chart_layout"
+                android:layout_width="550dp"
+                android:layout_height="400dp"
+                android:gravity="center"
+                android:padding="20dp">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/piechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/pie_color_match"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pie_chart_layout"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/entertainment_pink"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="#ff4e77" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_toEndOf="@+id/entertainment_pink"
+                    android:text="Entertainment &amp; Leisure" />
+
+                <ImageView
+                    android:id="@+id/travel_orange"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/entertainment_pink"
+                    android:layout_marginTop="20dp"
+                    android:background="#ff8222" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView"
+                    android:layout_alignTop="@+id/travel_orange"
+                    android:text="Travel" />
+
+                <ImageView
+                    android:id="@+id/food_yellow"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/travel_orange"
+                    android:layout_marginTop="20dp"
+                    android:background="#ffe100" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView1"
+                    android:layout_alignTop="@id/food_yellow"
+                    android:text="Food" />
+
+                <ImageView
+                    android:id="@+id/shopping_green"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/food_yellow"
+                    android:layout_marginTop="20dp"
+                    android:background="#5d9f5c" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView2"
+                    android:layout_alignTop="@id/shopping_green"
+                    android:text="Shopping" />
+
+                <ImageView
+                    android:id="@+id/medicine_blue"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/shopping_green"
+                    android:layout_marginTop="20dp"
+                    android:background="#30e6df" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView3"
+                    android:layout_alignTop="@id/medicine_blue"
+                    android:text="Medicine" />
+
+                <ImageView
+                    android:id="@+id/miscellaneous_pink"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/medicine_blue"
+                    android:layout_marginTop="20dp"
+                    android:background="#e6304e" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView4"
+                    android:layout_alignTop="@id/miscellaneous_pink"
+                    android:text="Miscellaneous" />
+
+                <ImageView
+                    android:id="@+id/fixed_orange"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/miscellaneous_pink"
+                    android:layout_marginTop="20dp"
+                    android:background="#ef9f1e" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textView5"
+                    android:layout_alignTop="@id/fixed_orange"
+                    android:text="Fixed Bills" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/monthly_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/pie_color_match"
+                android:layout_marginTop="16dp"
+                android:background="#fff"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/monthly_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Monthly Income"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/monthly_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/monthly_header"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="\u20B9 4899"
+                    android:textColor="#37be40"
+                    android:textSize="30dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/edit_monthly_income"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/monthly_header"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_edit"
+                    android:textSize="20dp"
+                    android:textStyle="italic"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/add_monthly_income"
+                    android:layout_width="225dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/monthly_header"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Enter monthly income here"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/submit_income"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/add_monthly_income"
+                    android:layout_alignBottom="@+id/add_monthly_income"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@+id/add_monthly_income"
+                    android:text="Submit"
+                    android:textColor="#6384f2" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/pledgelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/monthly_layout"
+                android:layout_marginTop="17dp"
+                android:background="#fff"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/pledgeheader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Maximum limit per month"
+                    android:textSize="25dp" />
+
+                <EditText
+                    android:id="@+id/pledgeamountedittext"
+                    android:layout_width="225dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pledgeheader"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Enter maximum limit here"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/submitpledge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/pledgeamountedittext"
+                    android:layout_alignBottom="@+id/pledgeamountedittext"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="14dp"
+                    android:text="Submit"
+                    android:textColor="#6384f2" />
+
+                <TextView
+                    android:id="@+id/pledgeamounttextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pledgeheader"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#37be40"
+                    android:textSize="30dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/edit_pledge"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_edit"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/move_to_fixed_spends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pledgelayout"
+                android:layout_marginTop="17dp"
+                android:background="#fff"
+                android:padding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/check_fixed_button">
+
+                    <TextView
+                        android:id="@+id/move_to_fixed_spends_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="Fixed Bills"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/move_to_fixed_spends_text"
+                        android:layout_marginTop="15dp"
+                        android:text="Tell us about your fixed monthly expenses. We will notify you every month so you'll never forget."
+                        android:textColor="#4879a4" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/check_fixed_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="#6bbe56"
+                    android:padding="10dp"
+                    android:text="Check my Fixed Bills"
+                    android:textColor="#fff" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/expenditure_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/last_bill_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="#6384f2">
+
+                <TextView
+                    android:id="@+id/total_monthly_spends"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="YOUR EXPENDITURE DETAILS "
+                    android:textColor="#fff"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/last_bill_layout"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_below="@id/move_to_fixed_spends"
+                android:layout_marginTop="17dp"
+                android:background="#fff">
+
+                <TextView
+                    android:id="@+id/last_bill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Last Scanned Bill"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/last_bill_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/last_bill"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="₹ 0"
+                    android:textColor="#37be40"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/last_bill_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/last_bill_value"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:text="Spent on: " />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/line_chart_layout"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/expenditure_layout"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:padding="20dp">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/linechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@id/line_chart_layout"></RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+        android:id="@+id/cam_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#6384f2"
+        android:text="Scan new Bill"
+        android:textColor="#ffffff" />
     </RelativeLayout>
 
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="70dp"
-          android:layout_below="@id/line_chart_layout"></RelativeLayout>
-  </RelativeLayout>
 
-</ScrollView>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_test"
+        app:menu="@menu/activity_test_drawer" />
 
-  <Button
-      android:id="@+id/cam_button"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:background="#6384f2"
-      android:text="Scan new Bill"
-      android:textColor="#ffffff" />
-
-
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

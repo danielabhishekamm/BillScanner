@@ -16,13 +16,21 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -60,52 +68,62 @@ import java.util.List;
 
 import static com.example.chhaya_pc.billscanner.NotificationUtils.*;
 
-public class MainActivity extends AppCompatActivity implements OnChartValueSelectedListener ,OnChartGestureListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnChartValueSelectedListener, OnChartGestureListener {
+    Button camButton;
+    TextView totalMonthlySpent;
+    TextView lastBillValue;
+    TextView monthlyIncome;
+    ImageView editIncome;
+    EditText addMonthlyIncome;
+    TextView submitIncome;
+    Preferences preferences;
 
-
-
-Button camButton;
-TextView totalMonthlySpent;
-TextView lastBillValue;
-TextView monthlyIncome;
-ImageView editIncome;
-EditText addMonthlyIncome;
-TextView submitIncome;
-Preferences preferences;
-
-TextView submitPledge, pledgeTextView, pledgeEditText;
-ImageView editPledge;
-Double scannedBillAmount;
-TextView lastBillCategory;
-TextView moveToFixedSpends;
-Double currentMonthlySpend=0d;
-RelativeLayout expendituresLayout;
-Float totalforMonth=0f;
-static int NOTIFICATION_ID=10;
-float entertainmentPerc=0f, travelPerc=0f, foodPerc=0f, shoppingPerc=0f, medicinePerc=0f, miscPerc=0f, fixedPerc=0f;
-final String[] categories = new String[]{"Entertainment and Leisure", "Travel", "Food", "Shopping", "Medicine", "Miscallaneous"};
+    TextView submitPledge, pledgeTextView, pledgeEditText;
+    ImageView editPledge;
+    Double scannedBillAmount;
+    TextView lastBillCategory;
+    TextView moveToFixedSpends;
+    Double currentMonthlySpend = 0d;
+    RelativeLayout expendituresLayout;
+    Float totalforMonth = 0f;
+    static int NOTIFICATION_ID = 10;
+    float entertainmentPerc = 0f, travelPerc = 0f, foodPerc = 0f, shoppingPerc = 0f, medicinePerc = 0f, miscPerc = 0f, fixedPerc = 0f;
+    final String[] categories = new String[]{"Entertainment and Leisure", "Travel", "Food", "Shopping", "Medicine", "Miscallaneous"};
     public static final int[] PIE_COLORS = {
             Color.rgb(192, 255, 140), Color.rgb(255, 247, 140), Color.rgb(255, 208, 140),
 
     };
-    Double totalFixed=0d;
+    Double totalFixed = 0d;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fixedBillsNotify();
         setContentView(R.layout.activity_main);
-        preferences=new Preferences(getApplicationContext());
-        lastBillValue=(TextView)findViewById(R.id.last_bill_value);
-        camButton=(Button) findViewById(R.id.cam_button);
 
-        submitIncome=(TextView) findViewById(R.id.submit_income);
-        addMonthlyIncome=(EditText)findViewById(R.id.add_monthly_income);
-        monthlyIncome =(TextView)findViewById(R.id.monthly_income);
-        editIncome=(ImageView)findViewById(R.id.edit_monthly_income);
-       // totalMonthlySpent=(TextView)findViewById(R.id.total_spent);
-        expendituresLayout=(RelativeLayout)findViewById(R.id.expenditure_layout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_activity_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        preferences = new Preferences(getApplicationContext());
+        lastBillValue = (TextView) findViewById(R.id.last_bill_value);
+        camButton = (Button) findViewById(R.id.cam_button);
+
+        submitIncome = (TextView) findViewById(R.id.submit_income);
+        addMonthlyIncome = (EditText) findViewById(R.id.add_monthly_income);
+        monthlyIncome = (TextView) findViewById(R.id.monthly_income);
+        editIncome = (ImageView) findViewById(R.id.edit_monthly_income);
+        // totalMonthlySpent=(TextView)findViewById(R.id.total_spent);
+        expendituresLayout = (RelativeLayout) findViewById(R.id.expenditure_layout);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
 
         setCategorySpendsValues();
@@ -116,19 +134,18 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
 
 
         List<MonthlyTrackingBean> monthlyTrackingBeans = new SQLiteHelper(getApplicationContext()).getAllSpends();
-        Log.d("TAG",monthlyTrackingBeans.size()+"");
-        for(int i=0;i<monthlyTrackingBeans.size();i++){
-            currentMonthlySpend+=Double.parseDouble(monthlyTrackingBeans.get(i).getAmount());
+        Log.d("TAG", monthlyTrackingBeans.size() + "");
+        for (int i = 0; i < monthlyTrackingBeans.size(); i++) {
+            currentMonthlySpend += Double.parseDouble(monthlyTrackingBeans.get(i).getAmount());
         }
 
 
-
         //  totalMonthlySpent.setText("Rs. "+currentMonthlySpend+"");
-        submitPledge=(TextView)findViewById(R.id.submitpledge);
-        pledgeEditText=(EditText)findViewById(R.id.pledgeamountedittext);
-        pledgeTextView=(TextView)findViewById(R.id.pledgeamounttextview);
-        editPledge=(ImageView)findViewById(R.id.edit_pledge);
-        lastBillCategory = (TextView)findViewById(R.id.last_bill_category);
+        submitPledge = (TextView) findViewById(R.id.submitpledge);
+        pledgeEditText = (EditText) findViewById(R.id.pledgeamountedittext);
+        pledgeTextView = (TextView) findViewById(R.id.pledgeamounttextview);
+        editPledge = (ImageView) findViewById(R.id.edit_pledge);
+        lastBillCategory = (TextView) findViewById(R.id.last_bill_category);
 
         editPledge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,9 +156,9 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                 pledgeTextView.setVisibility(View.GONE);
             }
         });
-        lastBillValue.setText("\u20B9 "+PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastBillValue","0.00"));
-        lastBillCategory.setText("Spent on: "+PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastBillCategory",""));
-       // moveToFixedSpends=(TextView)findViewById(R.id.move_to_fixed_spends_text);
+        lastBillValue.setText("\u20B9 " + PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastBillValue", "0.00"));
+        lastBillCategory.setText("Spent on: " + PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastBillCategory", ""));
+        // moveToFixedSpends=(TextView)findViewById(R.id.move_to_fixed_spends_text);
 //        moveToFixedSpends.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -158,12 +175,11 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
         findViewById(R.id.move_to_fixed_spends).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")){
-                    Intent intent = new Intent(MainActivity.this,FixedSpendsActivity.class);
-                    startActivity(intent);}
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Enter monthly income",Toast.LENGTH_SHORT).show();
+                if (!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")) {
+                    Intent intent = new Intent(MainActivity.this, FixedSpendsActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter monthly income", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -171,53 +187,44 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
         findViewById(R.id.check_fixed_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")){
-                    Intent intent = new Intent(MainActivity.this,FixedSpendsActivity.class);
-                    startActivity(intent);}
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Enter monthly income",Toast.LENGTH_SHORT).show();
+                if (!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")) {
+                    Intent intent = new Intent(MainActivity.this, FixedSpendsActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Enter monthly income", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        if(!new Preferences(getApplicationContext()).getPledge().equals("")){
+        if (!new Preferences(getApplicationContext()).getPledge().equals("")) {
             pledgeTextView.setVisibility(View.VISIBLE);
             editPledge.setVisibility(View.VISIBLE);
             pledgeEditText.setVisibility(View.GONE);
             submitPledge.setVisibility(View.GONE);
-            pledgeTextView.setText("\u20B9 "+new Preferences(getApplicationContext()).getPledge());
+            pledgeTextView.setText("\u20B9 " + new Preferences(getApplicationContext()).getPledge());
         }
         submitPledge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pledgeEditText.getText()!=null&&pledgeEditText.getText().toString().length()>0)
-                    if(Double.parseDouble(pledgeEditText.getText().toString())>=0d  ){
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("pledge",pledgeEditText.getText().toString()).commit();
-                    pledgeTextView.setVisibility(View.VISIBLE);
-                    pledgeEditText.setVisibility(View.GONE);
-                    editPledge.setVisibility(View.VISIBLE);
-                    submitPledge.setVisibility(View.GONE);
-                    pledgeTextView.setText("\u20B9 "+pledgeEditText.getText()+"");
+                if (pledgeEditText.getText() != null && pledgeEditText.getText().toString().length() > 0)
+                    if (Double.parseDouble(pledgeEditText.getText().toString()) >= 0d) {
+                        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("pledge", pledgeEditText.getText().toString()).commit();
+                        pledgeTextView.setVisibility(View.VISIBLE);
+                        pledgeEditText.setVisibility(View.GONE);
+                        editPledge.setVisibility(View.VISIBLE);
+                        submitPledge.setVisibility(View.GONE);
+                        pledgeTextView.setText("\u20B9 " + pledgeEditText.getText() + "");
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             setLineChartValues();
                         }
-                    }
+                    } else
+                        Toast.makeText(getApplicationContext(), "Pledge percentage should be valid.", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(getApplicationContext(),"Pledge percentage should be valid.",Toast.LENGTH_SHORT).show();
-                    else
-                    Toast.makeText(getApplicationContext(),"Pledge percentage should be valid.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Pledge percentage should be valid.", Toast.LENGTH_SHORT).show();
 
 
             }
         });
-
-
-
-
-
-
-
 
 
         editIncome.setOnClickListener(new View.OnClickListener() {
@@ -230,32 +237,30 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
             }
         });
 
-        if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("monthly_income",null)!=null)
-        {
-            Log.d("TAG","monthly income NOT NULL"+ preferences.getMonthlyIncome());
+        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("monthly_income", null) != null) {
+            Log.d("TAG", "monthly income NOT NULL" + preferences.getMonthlyIncome());
             addMonthlyIncome.setVisibility(View.GONE);
             submitIncome.setVisibility(View.GONE);
             monthlyIncome.setVisibility(View.VISIBLE);
             editIncome.setVisibility(View.VISIBLE);
-            monthlyIncome.setText("\u20B9 "+new Preferences(getApplicationContext()).getMonthlyIncome());
+            monthlyIncome.setText("\u20B9 " + new Preferences(getApplicationContext()).getMonthlyIncome());
 
-        }
-        else
-            Log.d("TAG","monthly income NULL");
+        } else
+            Log.d("TAG", "monthly income NULL");
 
         submitIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (addMonthlyIncome.getText().toString() != null && !addMonthlyIncome.getText().toString().equals("")) {
-                    Log.d("TAG","monthly income "+addMonthlyIncome.getText().toString());
+                    Log.d("TAG", "monthly income " + addMonthlyIncome.getText().toString());
                     //preferences.setMonthlyIncome(addMonthlyIncome.getText().toString());
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("monthly_income",addMonthlyIncome.getText().toString()).commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("monthly_income", addMonthlyIncome.getText().toString()).commit();
                     addMonthlyIncome.setVisibility(View.GONE);
                     submitIncome.setVisibility(View.GONE);
                     monthlyIncome.setVisibility(View.VISIBLE);
                     editIncome.setVisibility(View.VISIBLE);
-                    Log.d("TAG","pref: "+preferences.getMonthlyIncome());
-                    monthlyIncome.setText("\u20B9 "+new Preferences(getApplicationContext()).getMonthlyIncome());
+                    Log.d("TAG", "pref: " + preferences.getMonthlyIncome());
+                    monthlyIncome.setText("\u20B9 " + new Preferences(getApplicationContext()).getMonthlyIncome());
                 }
             }
         });
@@ -266,8 +271,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                 startActivity(intent);
             }
         });
-        if(getIntent().getStringExtra("total")!=null && getIntent().getStringExtra("total").length()!=0)
-        {
+        if (getIntent().getStringExtra("total") != null && getIntent().getStringExtra("total").length() != 0) {
 
 
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -278,26 +282,25 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
             final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
 
             dialogBuilder.setTitle("Confirm Amount");
-            dialogBuilder.setMessage("Bill Amount: Rs"+getIntent().getStringExtra("total").replace(",",""));
-            edt.setText(getIntent().getStringExtra("total").replace(",",""));
+            dialogBuilder.setMessage("Bill Amount: Rs" + getIntent().getStringExtra("total").replace(",", ""));
+            edt.setText(getIntent().getStringExtra("total").replace(",", ""));
             final Spinner dropdown = dialogView.findViewById(R.id.spinner1);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
             dropdown.setAdapter(adapter);
             dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     //do something with edt.getText().toString();
-                    if (edt.getText().toString()!=null&& !edt.getText().toString().equals("")){
-                     scannedBillAmount=Double.parseDouble(edt.getText().toString());
-                     Log.d("TAG if",scannedBillAmount+"");
-                    }
-                    else {
+                    if (edt.getText().toString() != null && !edt.getText().toString().equals("")) {
+                        scannedBillAmount = Double.parseDouble(edt.getText().toString());
+                        Log.d("TAG if", scannedBillAmount + "");
+                    } else {
                         scannedBillAmount = Double.parseDouble(getIntent().getStringExtra("total").replace(",", ""));
                         Log.d("TAG else", scannedBillAmount + "");
                     }
-                    lastBillValue.setText("\u20B9 "+scannedBillAmount+"");
-                    lastBillCategory.setText("Spent on: "+categories[dropdown.getSelectedItemPosition()]);
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("lastBillValue",scannedBillAmount+"").commit();
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("lastBillCategory",categories[dropdown.getSelectedItemPosition()]).commit();
+                    lastBillValue.setText("\u20B9 " + scannedBillAmount + "");
+                    lastBillCategory.setText("Spent on: " + categories[dropdown.getSelectedItemPosition()]);
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("lastBillValue", scannedBillAmount + "").commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("lastBillCategory", categories[dropdown.getSelectedItemPosition()]).commit();
                     SQLiteHelper sqLiteHelper = new SQLiteHelper(getApplicationContext());
 
                     Calendar c = Calendar.getInstance();
@@ -307,7 +310,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     String formattedDate = df.format(c.getTime());
                     MonthlyTrackingBean bean = new MonthlyTrackingBean();
                     bean.setTimeStamp(formattedDate);
-                    bean.setAmount(scannedBillAmount+"");
+                    bean.setAmount(scannedBillAmount + "");
                     bean.setCategory(categories[dropdown.getSelectedItemPosition()]);
                     sqLiteHelper.addSpend(bean);
                     setCategorySpendsValues();
@@ -330,7 +333,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
             b.show();
 
 
-            Toast.makeText(this,getIntent().getStringExtra("total").replace(",",""),Toast.LENGTH_SHORT ).show();
+            Toast.makeText(this, getIntent().getStringExtra("total").replace(",", ""), Toast.LENGTH_SHORT).show();
 
         }
 
@@ -338,15 +341,10 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
         expendituresLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,SpendDetailsActivity.class );
+                Intent intent = new Intent(MainActivity.this, SpendDetailsActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
-
-
 
 
     }
@@ -448,7 +446,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     day8spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("9") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("09")) {
                     day9spends += Float.parseFloat(beansList.get(i).getAmount());
-                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10") ) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10")) {
                     day10spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("11")) {
                     day11spends += Float.parseFloat(beansList.get(i).getAmount());
@@ -456,9 +454,9 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     day12spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("13")) {
                     day13spends += Float.parseFloat(beansList.get(i).getAmount());
-                }  else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("14")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("14")) {
                     day14spends += Float.parseFloat(beansList.get(i).getAmount());
-                }  else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("15")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("15")) {
                     day15spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("16")) {
                     day16spends += Float.parseFloat(beansList.get(i).getAmount());
@@ -555,15 +553,14 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
         listOfDailySpendsAccumulative.add(day30spends);
 
         ArrayList<Entry> yVals = new ArrayList<Entry>();
-         float total = 0f;
+        float total = 0f;
         for (int i = 0; i < Integer.parseInt(splits[0]); i++) {
-            total+= listOfDailySpendsAccumulative.get(i);
+            total += listOfDailySpendsAccumulative.get(i);
             yVals.add(new Entry(listOfDailySpendsAccumulative.get(i), i));
             xVals1.add(xVals.get(i));
         }
-        if(new Preferences(getApplicationContext()).getPledge()!=null && !new Preferences(getApplicationContext()).getPledge().equals(""))
-        {
-            if(total>Float.parseFloat(new Preferences(getApplicationContext()).getPledge())) {
+        if (new Preferences(getApplicationContext()).getPledge() != null && !new Preferences(getApplicationContext()).getPledge().equals("")) {
+            if (total > Float.parseFloat(new Preferences(getApplicationContext()).getPledge())) {
                 Notification builder;
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -602,27 +599,27 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                 Log.d("Tag:", "Notif sent");
 
             }
-            }
+        }
 
 
-    LineDataSet set1;
+        LineDataSet set1;
 // create a dataset and give it a type
-    set1 = new LineDataSet(yVals, "Actual Spends");
-    set1.setFillAlpha(110);
-    // set1.setFillColor(Color.RED);
+        set1 = new LineDataSet(yVals, "Actual Spends");
+        set1.setFillAlpha(110);
+        // set1.setFillColor(Color.RED);
 
-    // set the line to be drawn like this "- - - - - -"
-    // set1.enableDashedLine(10f, 5f, 0f);
-    // set1.enableDashedHighlightLine(10f, 5f, 0f);
-    set1.setColor(Color.BLACK);
-    set1.setCircleColor(Color.BLACK);
-    set1.setLineWidth(1f);
-    set1.setCircleRadius(0f);
-    set1.setDrawCircleHole(false);
-    set1.setValueTextSize(0f);
-    set1.setDrawFilled(true);
+        // set the line to be drawn like this "- - - - - -"
+        // set1.enableDashedLine(10f, 5f, 0f);
+        // set1.enableDashedHighlightLine(10f, 5f, 0f);
+        set1.setColor(Color.BLACK);
+        set1.setCircleColor(Color.BLACK);
+        set1.setLineWidth(1f);
+        set1.setCircleRadius(0f);
+        set1.setDrawCircleHole(false);
+        set1.setValueTextSize(0f);
+        set1.setDrawFilled(true);
 
-        if(new Preferences(getApplicationContext()).getPledge()!=null && !new Preferences(getApplicationContext()).getPledge().equals("")) {
+        if (new Preferences(getApplicationContext()).getPledge() != null && !new Preferences(getApplicationContext()).getPledge().equals("")) {
             LimitLine upper_limit = new LimitLine(Float.parseFloat(new Preferences(getApplicationContext()).getPledge()), "Budget: \u20B9" + Float.parseFloat(new Preferences(getApplicationContext()).getPledge()));
             upper_limit.setLineWidth(4f);
             upper_limit.enableDashedLine(10f, 10f, 0f);
@@ -642,14 +639,14 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
 
             mChart.getAxisRight().setEnabled(false);
         }
-    ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-    dataSets.add(set1);// add the datasets
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        dataSets.add(set1);// add the datasets
 
         // create a data object with the datasets
-    LineData data = new LineData(xVals, dataSets);
-    // set data
-    mChart.setData(data);
-    mChart.setDescription("Monthly Expenditure");
+        LineData data = new LineData(xVals, dataSets);
+        // set data
+        mChart.setData(data);
+        mChart.setDescription("Monthly Expenditure");
 
         Legend l = mChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
@@ -667,109 +664,108 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
     }
 
 
+    public void setPieChartValues() {
 
-public void setPieChartValues() {
+        PieChart pieChart = (PieChart) findViewById(R.id.piechart);
+        pieChart.setUsePercentValues(true);
+        ArrayList<Entry> yvalues = new ArrayList<Entry>();
+        yvalues.add(new Entry(entertainmentPerc / totalforMonth * 100, 0));
+        yvalues.add(new Entry(travelPerc / totalforMonth * 100, 1));
+        yvalues.add(new Entry(foodPerc / totalforMonth * 100, 2));
+        yvalues.add(new Entry(shoppingPerc / totalforMonth * 100, 3));
+        yvalues.add(new Entry(medicinePerc / totalforMonth * 100, 4));
+        yvalues.add(new Entry(miscPerc / totalforMonth * 100, 5));
+        yvalues.add(new Entry(fixedPerc / totalforMonth * 100, 6));
+        PieDataSet dataSet = new PieDataSet(yvalues, "Expenditure Details");
+        ArrayList<String> xVals = new ArrayList<String>();
 
-    PieChart pieChart = (PieChart) findViewById(R.id.piechart);
-    pieChart.setUsePercentValues(true);
-    ArrayList<Entry> yvalues = new ArrayList<Entry>();
-    yvalues.add(new Entry(entertainmentPerc / totalforMonth * 100, 0));
-    yvalues.add(new Entry(travelPerc / totalforMonth * 100, 1));
-    yvalues.add(new Entry(foodPerc / totalforMonth * 100, 2));
-    yvalues.add(new Entry(shoppingPerc / totalforMonth * 100, 3));
-    yvalues.add(new Entry(medicinePerc / totalforMonth * 100, 4));
-    yvalues.add(new Entry(miscPerc / totalforMonth * 100, 5));
-    yvalues.add(new Entry(fixedPerc / totalforMonth * 100, 6));
-    PieDataSet dataSet = new PieDataSet(yvalues, "Expenditure Details");
-    ArrayList<String> xVals = new ArrayList<String>();
+        xVals.add("");
+        xVals.add("");
+        xVals.add("");
+        xVals.add("");
+        xVals.add("");
+        xVals.add("");
+        xVals.add("");
 
-    xVals.add("");
-    xVals.add("");
-    xVals.add("");
-    xVals.add("");
-    xVals.add("");
-    xVals.add("");
-    xVals.add("");
+        PieData data = new PieData(xVals, dataSet);
 
-    PieData data = new PieData(xVals, dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        // Default value/number
+        //data.setValueFormatter(new DefaultValueFormatter(0));
+        pieChart.setData(data);
+        pieChart.setDescription("Monthly Expenditure");
 
-    data.setValueFormatter(new PercentFormatter());
-    // Default value/number
-    //data.setValueFormatter(new DefaultValueFormatter(0));
-    pieChart.setData(data);
-    pieChart.setDescription("Monthly Expenditure");
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setTransparentCircleRadius(10f);
+        pieChart.setHoleRadius(10f);
 
-    pieChart.setDrawHoleEnabled(true);
-    pieChart.setTransparentCircleRadius(10f);
-    pieChart.setHoleRadius(10f);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        data.setValueTextSize(13f);
+        data.setValueTextColor(Color.DKGRAY);
+        pieChart.setOnChartValueSelectedListener(this);
 
-    dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-    data.setValueTextSize(13f);
-    data.setValueTextColor(Color.DKGRAY);
-    pieChart.setOnChartValueSelectedListener(this);
+        pieChart.animateXY(1400, 1400);
 
-    pieChart.animateXY(1400, 1400);
-
-
-}
-
-
-public void setCategorySpendsValues() {
-
-    List<MonthlyTrackingBean> beansList = new SQLiteHelper(getApplicationContext()).getAllSpends();
-    Calendar c = Calendar.getInstance();
-    System.out.println("Current time => " + c.getTime());
-    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-    String formattedDate = df.format(c.getTime());
-    String splits[] = formattedDate.split("-");
-    String year = splits[2];
-    String month = splits[1];
-
-    Log.d("year", splits[2]);
-    Log.d("month", splits[1]);
-    Log.d("day", splits[0]);
-    Double yearlySpends = 0d;
-    Double monthlySpends = 0d;
-    Double weeklySpends = 0d;
-    Double todaysSpends = 0d;
-
-
-    for (int i = 0; i < beansList.size(); i++) {
-        MonthlyTrackingBean bean = beansList.get(i);
-        String date = bean.getTimeStamp();
-        String dateSplits[] = date.split("-");
-        if (date.contains(year) && date.contains(month)) {
-            switch (bean.getCategory()) {
-                case "Entertainment and Leisure":
-                    entertainmentPerc += Float.parseFloat(bean.getAmount());
-                    break;
-                case "Travel":
-                    travelPerc += Float.parseFloat(bean.getAmount());
-                    break;
-                case "Food":
-                    foodPerc += Float.parseFloat(bean.getAmount());
-                    break;
-                case "Shopping":
-                    shoppingPerc += Float.parseFloat(bean.getAmount());
-                    break;
-                case "Medicine":
-                    medicinePerc += Float.parseFloat(bean.getAmount());
-                    break;
-                case "Miscallaneous":
-                    miscPerc += Float.parseFloat(bean.getAmount());
-                    break;
-
-            }
-            if(bean.getCategory().contains("Fixed Spends"))
-                fixedPerc+=Float.parseFloat(bean.getAmount());
-
-            totalforMonth += Float.parseFloat(bean.getAmount());
-        }
 
     }
 
 
-}
+    public void setCategorySpendsValues() {
+
+        List<MonthlyTrackingBean> beansList = new SQLiteHelper(getApplicationContext()).getAllSpends();
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        String splits[] = formattedDate.split("-");
+        String year = splits[2];
+        String month = splits[1];
+
+        Log.d("year", splits[2]);
+        Log.d("month", splits[1]);
+        Log.d("day", splits[0]);
+        Double yearlySpends = 0d;
+        Double monthlySpends = 0d;
+        Double weeklySpends = 0d;
+        Double todaysSpends = 0d;
+
+
+        for (int i = 0; i < beansList.size(); i++) {
+            MonthlyTrackingBean bean = beansList.get(i);
+            String date = bean.getTimeStamp();
+            String dateSplits[] = date.split("-");
+            if (date.contains(year) && date.contains(month)) {
+                switch (bean.getCategory()) {
+                    case "Entertainment and Leisure":
+                        entertainmentPerc += Float.parseFloat(bean.getAmount());
+                        break;
+                    case "Travel":
+                        travelPerc += Float.parseFloat(bean.getAmount());
+                        break;
+                    case "Food":
+                        foodPerc += Float.parseFloat(bean.getAmount());
+                        break;
+                    case "Shopping":
+                        shoppingPerc += Float.parseFloat(bean.getAmount());
+                        break;
+                    case "Medicine":
+                        medicinePerc += Float.parseFloat(bean.getAmount());
+                        break;
+                    case "Miscallaneous":
+                        miscPerc += Float.parseFloat(bean.getAmount());
+                        break;
+
+                }
+                if (bean.getCategory().contains("Fixed Spends"))
+                    fixedPerc += Float.parseFloat(bean.getAmount());
+
+                totalforMonth += Float.parseFloat(bean.getAmount());
+            }
+
+        }
+
+
+    }
 
     @Override
     public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
@@ -821,7 +817,7 @@ public void setCategorySpendsValues() {
         }
     }
 
-    void fixedBillsNotify(){
+    void fixedBillsNotify() {
         List<MonthlyTrackingBean> beansList = new SQLiteHelper(getApplicationContext()).getAllSpends();
         Calendar c = Calendar.getInstance();
         System.out.println("Current time => " + c.getTime());
@@ -831,22 +827,19 @@ public void setCategorySpendsValues() {
         String year = splits[2];
         String month = splits[1];
         List<String> paidFixed = new ArrayList<>();
-        for(int i=0 ; i <beansList.size(); i++){
-            Log.d("TAG-fixed",beansList.get(i).getCategory()+" "+beansList.get(i).getAmount());
-            if(beansList.get(i).getCategory().contains("Fixed Spends")){
-                Log.d(beansList.get(i).getTimeStamp(),"TAG DATE");
-                if (beansList.get(i).getTimeStamp().split("-")[1].equalsIgnoreCase(month)){
+        for (int i = 0; i < beansList.size(); i++) {
+            Log.d("TAG-fixed", beansList.get(i).getCategory() + " " + beansList.get(i).getAmount());
+            if (beansList.get(i).getCategory().contains("Fixed Spends")) {
+                Log.d(beansList.get(i).getTimeStamp(), "TAG DATE");
+                if (beansList.get(i).getTimeStamp().split("-")[1].equalsIgnoreCase(month)) {
 
                     paidFixed.add(beansList.get(i).getCategory());
                 }
             }
         }
-        if(paidFixed.contains("Fixed Spends - House Rent"))
-        {
-        }
-        else
-        {
-            if(Integer.parseInt(splits[0])>5){
+        if (paidFixed.contains("Fixed Spends - House Rent")) {
+        } else {
+            if (Integer.parseInt(splits[0]) > 5) {
                 //notification for house rent
 
                 Notification builder;
@@ -890,12 +883,9 @@ public void setCategorySpendsValues() {
             }
 
         }
-        if(paidFixed.contains("Fixed Spends - Milk Amount"))
-        {
-        }
-        else
-        {
-            if(Integer.parseInt(splits[0])>5){
+        if (paidFixed.contains("Fixed Spends - Milk Amount")) {
+        } else {
+            if (Integer.parseInt(splits[0]) > 5) {
                 //notification for milk amount
 
 
@@ -937,16 +927,13 @@ public void setCategorySpendsValues() {
                 Log.d("Tag:", "Notif sent");
 
 
-
             }
 
         }
-        if(paidFixed.contains("Fixed Spends - Newspaper Amount"))
-        {
+        if (paidFixed.contains("Fixed Spends - Newspaper Amount")) {
 
-        }
-        else{
-            if(Integer.parseInt(splits[0])>5){
+        } else {
+            if (Integer.parseInt(splits[0]) > 5) {
                 //notification for newspaper amount
 
 
@@ -988,19 +975,14 @@ public void setCategorySpendsValues() {
                 Log.d("Tag:", "Notif sent");
 
 
-
-
             }
 
         }
-        if(paidFixed.contains("Fixed Spends - Electricity Amount"))
-        {
-        }
-        else {
+        if (paidFixed.contains("Fixed Spends - Electricity Amount")) {
+        } else {
 
-            if(Integer.parseInt(splits[0])>5){
+            if (Integer.parseInt(splits[0]) > 5) {
                 //notification for electricity amount
-
 
 
                 Notification builder;
@@ -1041,9 +1023,58 @@ public void setCategorySpendsValues() {
                 Log.d("Tag:", "Notif sent");
 
 
-
-
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_activity_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_scan_bill) {
+            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, CamActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_search_by_date) {
+            Intent intent = new Intent(MainActivity.this, SearchByDateActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_expense_details) {
+            Intent intent = new Intent(MainActivity.this, SpendDetailsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_contact) {
+            Intent intent = new Intent(MainActivity.this, ContactsActivity.class);
+            startActivity(intent);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_activity_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
