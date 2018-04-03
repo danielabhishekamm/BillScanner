@@ -4,21 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chhaya_pc.billscanner.FixedSpendsActivity">
+    tools:context="com.example.chhaya_pc.billscanner.FixedSpendsActivity"
+    >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/fixed_header"
+        android:src="@drawable/billtopay"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fixedspendslayout"
-        android:layout_below="@id/pledgelayout"
+        android:layout_below="@id/fixed_header"
         android:layout_marginTop="17dp"
         android:layout_marginStart="15dp"
-        android:background="#fff"
-        android:padding="20dp">
+        android:background="#f2efd5"
+        android:padding="20dp"
+        android:layout_centerInParent="true">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tell us what fixed spends you have this month"
+            android:text="Regular Expenditure for every month | Mark paid when done"
             android:textSize="20dp"
+            android:textColor="#000"
             android:id="@+id/fixedspendsheader"/>
 
         <RelativeLayout
@@ -34,10 +49,11 @@
                 android:layout_alignBaseline="@+id/houserent"
                 android:layout_alignBottom="@+id/houserent"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:text="House Rent"
                 android:visibility="gone"
-                android:textSize="19dp"/>
+                android:textSize="19dp"
+                android:layout_toLeftOf="@id/houserent_edit"/>
 
             <EditText
                 android:id="@+id/houserent"
@@ -65,10 +81,20 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_edit"
-                android:layout_toRightOf="@id/houserent_textview"
+                android:layout_toLeftOf="@id/house_rent_paid"
                 android:visibility="gone"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:id="@+id/houserent_edit"/>
+
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/house_rent_paid"
+                android:background="#5fc254"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:text="Mark Paid" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -84,10 +110,11 @@
                 android:layout_alignBaseline="@+id/milkamount"
                 android:layout_alignBottom="@+id/milkamount"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:text="Milk"
                 android:visibility="gone"
-                android:textSize="19dp"/>
+                android:textSize="19dp"
+                android:layout_toLeftOf="@id/milk_edit"/>
 
             <EditText
                 android:id="@+id/milkamount"
@@ -115,10 +142,20 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_edit"
-                android:layout_toRightOf="@id/milk_textview"
+                android:layout_toLeftOf="@id/milk_paid"
                 android:visibility="gone"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:id="@+id/milk_edit"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/milk_paid"
+                android:background="#5fc254"
+                android:textColor="#fff"
+
+                android:visibility="gone"
+                android:text="Mark Paid" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -134,10 +171,11 @@
                 android:layout_alignBaseline="@+id/newspaper_amount"
                 android:layout_alignBottom="@+id/newspaper_amount"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:text="News Paper"
                 android:visibility="gone"
-                android:textSize="19dp"/>
+                android:textSize="19dp"
+                android:layout_toLeftOf="@id/newspaper_edit"/>
 
             <EditText
                 android:id="@+id/newspaper_amount"
@@ -165,10 +203,20 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_edit"
-                android:layout_toRightOf="@id/newspaper_textview"
+                android:layout_toLeftOf="@id/newspaper_paid"
                 android:visibility="gone"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:id="@+id/newspaper_edit"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/newspaper_paid"
+                android:background="#5fc254"
+                android:textColor="#fff"
+
+                android:visibility="gone"
+                android:text="Mark Paid" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -184,10 +232,11 @@
                 android:layout_alignBaseline="@+id/electricity_amount"
                 android:layout_alignBottom="@+id/electricity_amount"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:text="Electricity"
                 android:visibility="gone"
-                android:textSize="19dp"/>
+                android:textSize="19dp"
+                android:layout_toLeftOf="@id/electricity_edit"/>
 
             <EditText
                 android:id="@+id/electricity_amount"
@@ -215,10 +264,19 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_edit"
-                android:layout_toRightOf="@id/electricity_textview"
+                android:layout_toLeftOf="@id/electricity_paid"
                 android:visibility="gone"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:id="@+id/electricity_edit"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/electricity_paid"
+                android:background="#5fc254"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:text="Mark Paid" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -233,10 +291,11 @@
                 android:layout_alignBaseline="@+id/other_amount"
                 android:layout_alignBottom="@+id/other_amount"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="10dp"
                 android:text="Other Fixed Spends"
                 android:visibility="gone"
-                android:textSize="19dp"/>
+                android:textSize="19dp"
+                android:layout_toLeftOf="@id/other_edit"/>
 
             <EditText
                 android:id="@+id/other_amount"
@@ -264,12 +323,21 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_edit"
-                android:layout_toRightOf="@id/other_textview"
-                android:layout_marginStart="10dp"
+                android:layout_toLeftOf="@id/other_paid"
+                android:layout_marginEnd="20dp"
                 android:visibility="gone"
                 android:id="@+id/other_edit"/>
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/other_paid"
+                android:background="#5fc254"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:text="Mark Paid" />
         </RelativeLayout>
     </RelativeLayout>
-
-
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

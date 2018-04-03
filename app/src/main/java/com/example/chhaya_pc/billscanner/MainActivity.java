@@ -81,6 +81,7 @@ TextView moveToFixedSpends;
 Double currentMonthlySpend=0d;
 RelativeLayout expendituresLayout;
 Float totalforMonth=0f;
+static int NOTIFICATION_ID=10;
 float entertainmentPerc=0f, travelPerc=0f, foodPerc=0f, shoppingPerc=0f, medicinePerc=0f, miscPerc=0f, fixedPerc=0f;
 final String[] categories = new String[]{"Entertainment and Leisure", "Travel", "Food", "Shopping", "Medicine", "Miscallaneous"};
     public static final int[] PIE_COLORS = {
@@ -91,6 +92,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fixedBillsNotify();
         setContentView(R.layout.activity_main);
         preferences=new Preferences(getApplicationContext());
         lastBillValue=(TextView)findViewById(R.id.last_bill_value);
@@ -139,19 +141,46 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
         });
         lastBillValue.setText("\u20B9 "+PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastBillValue","0.00"));
         lastBillCategory.setText("Spent on: "+PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("lastBillCategory",""));
-        moveToFixedSpends=(TextView)findViewById(R.id.move_to_fixed_spends_text);
-        moveToFixedSpends.setOnClickListener(new View.OnClickListener() {
+       // moveToFixedSpends=(TextView)findViewById(R.id.move_to_fixed_spends_text);
+//        moveToFixedSpends.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")){
+//                Intent intent = new Intent(MainActivity.this,FixedSpendsActivity.class);
+//                startActivity(intent);}
+//                else
+//                {
+//                    Toast.makeText(getApplicationContext(),"Enter monthly income",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+        findViewById(R.id.move_to_fixed_spends).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")){
-                Intent intent = new Intent(MainActivity.this,FixedSpendsActivity.class);
-                startActivity(intent);}
+                    Intent intent = new Intent(MainActivity.this,FixedSpendsActivity.class);
+                    startActivity(intent);}
                 else
                 {
                     Toast.makeText(getApplicationContext(),"Enter monthly income",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        findViewById(R.id.check_fixed_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!new Preferences(getApplicationContext()).getMonthlyIncome().equals("DEFAULT")){
+                    Intent intent = new Intent(MainActivity.this,FixedSpendsActivity.class);
+                    startActivity(intent);}
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Enter monthly income",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         if(!new Preferences(getApplicationContext()).getPledge().equals("")){
             pledgeTextView.setVisibility(View.VISIBLE);
             editPledge.setVisibility(View.VISIBLE);
@@ -419,7 +448,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     day8spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("9") || beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("09")) {
                     day9spends += Float.parseFloat(beansList.get(i).getAmount());
-                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("10") ) {
                     day10spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("11")) {
                     day11spends += Float.parseFloat(beansList.get(i).getAmount());
@@ -427,39 +456,39 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     day12spends += Float.parseFloat(beansList.get(i).getAmount());
                 } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("13")) {
                     day13spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("14")) {
+                }  else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("14")) {
                     day14spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("15")) {
+                }  else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("15")) {
                     day15spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("16")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("16")) {
                     day16spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("17")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("17")) {
                     day17spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("18")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("18")) {
                     day18spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("19")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("19")) {
                     day19spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("20")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("20")) {
                     day20spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("21")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("21")) {
                     day21spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("22")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("22")) {
                     day22spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("23")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("23")) {
                     day23spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("24")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("24")) {
                     day24spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("25")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("25")) {
                     day25spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("26")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("26")) {
                     day26spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("27")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("27")) {
                     day27spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("28")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("28")) {
                     day28spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("29")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("29")) {
                     day29spends += Float.parseFloat(beansList.get(i).getAmount());
-                }else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("30")) {
+                } else if (beansList.get(i).getTimeStamp().split("-")[0].equalsIgnoreCase("30")) {
                     day30spends += Float.parseFloat(beansList.get(i).getAmount());
                 }
             }
@@ -565,7 +594,7 @@ final String[] categories = new String[]{"Entertainment and Leisure", "Travel", 
                     builder = new Notification.Builder(this)
                             .setSmallIcon(R.drawable.billscanner_icon)
                             .setContentTitle("Budget Limit Crossed! ")
-                            .setContentText("Check the App to know how it happened")
+                            .setContentText("Check the App to know how it happened").setContentIntent(pendingIntent)
                             .build();
                 }
 
@@ -654,18 +683,18 @@ public void setPieChartValues() {
     PieDataSet dataSet = new PieDataSet(yvalues, "Expenditure Details");
     ArrayList<String> xVals = new ArrayList<String>();
 
-    xVals.add("Ent'nment & Leisure");
-    xVals.add("Travel");
-    xVals.add("Food");
-    xVals.add("Shopping");
-    xVals.add("Medicine");
-    xVals.add("Miscallaneous");
-    xVals.add("Fixed Spends");
+    xVals.add("");
+    xVals.add("");
+    xVals.add("");
+    xVals.add("");
+    xVals.add("");
+    xVals.add("");
+    xVals.add("");
 
     PieData data = new PieData(xVals, dataSet);
 
     data.setValueFormatter(new PercentFormatter());
-    // Default value
+    // Default value/number
     //data.setValueFormatter(new DefaultValueFormatter(0));
     pieChart.setData(data);
     pieChart.setDescription("Monthly Expenditure");
@@ -729,10 +758,11 @@ public void setCategorySpendsValues() {
                 case "Miscallaneous":
                     miscPerc += Float.parseFloat(bean.getAmount());
                     break;
-                case "Fixed Spends":
-                    fixedPerc += Float.parseFloat(bean.getAmount());
-                    break;
+
             }
+            if(bean.getCategory().contains("Fixed Spends"))
+                fixedPerc+=Float.parseFloat(bean.getAmount());
+
             totalforMonth += Float.parseFloat(bean.getAmount());
         }
 
@@ -779,5 +809,241 @@ public void setCategorySpendsValues() {
     @Override
     public void onChartTranslate(MotionEvent me, float dX, float dY) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setPieChartValues();
+        setCategorySpendsValues();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            setLineChartValues();
+        }
+    }
+
+    void fixedBillsNotify(){
+        List<MonthlyTrackingBean> beansList = new SQLiteHelper(getApplicationContext()).getAllSpends();
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
+        String splits[] = formattedDate.split("-");
+        String year = splits[2];
+        String month = splits[1];
+        List<String> paidFixed = new ArrayList<>();
+        for(int i=0 ; i <beansList.size(); i++){
+            Log.d("TAG-fixed",beansList.get(i).getCategory()+" "+beansList.get(i).getAmount());
+            if(beansList.get(i).getCategory().contains("Fixed Spends")){
+                Log.d(beansList.get(i).getTimeStamp(),"TAG DATE");
+                if (beansList.get(i).getTimeStamp().split("-")[1].equalsIgnoreCase(month)){
+
+                    paidFixed.add(beansList.get(i).getCategory());
+                }
+            }
+        }
+        if(paidFixed.contains("Fixed Spends - House Rent"))
+        {
+        }
+        else
+        {
+            if(Integer.parseInt(splits[0])>5){
+                //notification for house rent
+
+                Notification builder;
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                String NOTIFICATION_CHANNEL_ID = "my_notification_channel";
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                    // Configure the notification channel.
+                    notificationChannel.setDescription("Channel description");
+                    notificationChannel.enableLights(true);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.setVibrationPattern(new long[]{0, 1000});
+                    notificationChannel.enableVibration(true);
+                    notificationManager.createNotificationChannel(notificationChannel);
+
+
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid house rent. Click to mark it paid.").setChannelId(NOTIFICATION_CHANNEL_ID)
+                            .setContentIntent(pendingIntent)
+                            .build();
+                } else {
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid house rent. Click to mark it paid.").setContentIntent(pendingIntent)
+                            .build();
+                }
+
+                notificationManager.notify(NOTIFICATION_ID++, builder);
+                Log.d("Tag:", "Notif sent");
+
+
+            }
+
+        }
+        if(paidFixed.contains("Fixed Spends - Milk Amount"))
+        {
+        }
+        else
+        {
+            if(Integer.parseInt(splits[0])>5){
+                //notification for milk amount
+
+
+                Notification builder;
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                String NOTIFICATION_CHANNEL_ID = "my_notification_channel";
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                    // Configure the notification channel.
+                    notificationChannel.setDescription("Channel description");
+                    notificationChannel.enableLights(true);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.setVibrationPattern(new long[]{0, 1000});
+                    notificationChannel.enableVibration(true);
+                    notificationManager.createNotificationChannel(notificationChannel);
+
+
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid milk bill. Click to mark it paid.").setChannelId(NOTIFICATION_CHANNEL_ID)
+                            .setContentIntent(pendingIntent)
+                            .build();
+                } else {
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid milk bill. Click to mark it paid.").setContentIntent(pendingIntent)
+                            .build();
+                }
+
+                notificationManager.notify(NOTIFICATION_ID++, builder);
+                Log.d("Tag:", "Notif sent");
+
+
+
+            }
+
+        }
+        if(paidFixed.contains("Fixed Spends - Newspaper Amount"))
+        {
+
+        }
+        else{
+            if(Integer.parseInt(splits[0])>5){
+                //notification for newspaper amount
+
+
+                Notification builder;
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                String NOTIFICATION_CHANNEL_ID = "my_notification_channel";
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                    // Configure the notification channel.
+                    notificationChannel.setDescription("Channel description");
+                    notificationChannel.enableLights(true);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.setVibrationPattern(new long[]{0, 1000});
+                    notificationChannel.enableVibration(true);
+                    notificationManager.createNotificationChannel(notificationChannel);
+
+
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid newspaper bill. Click to mark it paid.").setChannelId(NOTIFICATION_CHANNEL_ID)
+                            .setContentIntent(pendingIntent)
+                            .build();
+                } else {
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid newspaper bill. Click to mark it paid.").setContentIntent(pendingIntent)
+                            .build();
+                }
+
+                notificationManager.notify(NOTIFICATION_ID++, builder);
+                Log.d("Tag:", "Notif sent");
+
+
+
+
+            }
+
+        }
+        if(paidFixed.contains("Fixed Spends - Electricity Amount"))
+        {
+        }
+        else {
+
+            if(Integer.parseInt(splits[0])>5){
+                //notification for electricity amount
+
+
+
+                Notification builder;
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                String NOTIFICATION_CHANNEL_ID = "my_notification_channel";
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                    // Configure the notification channel.
+                    notificationChannel.setDescription("Channel description");
+                    notificationChannel.enableLights(true);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.setVibrationPattern(new long[]{0, 1000});
+                    notificationChannel.enableVibration(true);
+                    notificationManager.createNotificationChannel(notificationChannel);
+
+
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid electricity bill. Click to mark it paid.").setChannelId(NOTIFICATION_CHANNEL_ID)
+                            .setContentIntent(pendingIntent)
+                            .build();
+                } else {
+                    builder = new Notification.Builder(this)
+                            .setSmallIcon(R.drawable.billscanner_icon)
+                            .setContentTitle("Bill Payment - Reminder")
+                            .setContentText("Looks like you haven't paid electricity bill. Click to mark it paid.").setContentIntent(pendingIntent)
+                            .build();
+                }
+
+                notificationManager.notify(NOTIFICATION_ID++, builder);
+                Log.d("Tag:", "Notif sent");
+
+
+
+
+            }
+        }
     }
 }

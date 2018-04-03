@@ -27,12 +27,126 @@
           android:layout_height="match_parent"/>
     </RelativeLayout>
 
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="20dp"
+          android:id="@+id/pie_color_match"
+          android:layout_below="@id/pie_chart_layout"
+          >
+          <ImageView
+              android:layout_width="10dp"
+              android:layout_height="10dp"
+              android:background="#ff4e77"
+              android:id="@+id/entertainment_pink"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="19dp"
+              android:layout_toEndOf="@+id/entertainment_pink"
+              android:text="Entertainment &amp; Leisure"
+              android:id="@+id/textView" />
+          <ImageView
+              android:layout_width="10dp"
+              android:layout_height="10dp"
+              android:background="#ff8222"
+              android:id="@+id/travel_orange"
+              android:layout_marginTop="20dp"
+              android:layout_below="@id/entertainment_pink"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignStart="@+id/textView"
+              android:layout_alignTop="@+id/travel_orange"
+              android:text="Travel"
+              android:id="@+id/textView1"/>
+          <ImageView
+              android:layout_width="10dp"
+              android:layout_height="10dp"
+              android:background="#ffe100"
+              android:id="@+id/food_yellow"
+              android:layout_marginTop="20dp"
+              android:layout_below="@id/travel_orange"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignStart="@+id/textView1"
+              android:layout_alignTop="@id/food_yellow"
+              android:text="Food"
+              android:id="@+id/textView2"/>
+          <ImageView
+              android:layout_width="10dp"
+              android:layout_height="10dp"
+              android:background="#5d9f5c"
+              android:id="@+id/shopping_green"
+              android:layout_marginTop="20dp"
+              android:layout_below="@id/food_yellow"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignStart="@+id/textView2"
+              android:layout_alignTop="@id/shopping_green"
+              android:text="Shopping"
+              android:id="@+id/textView3"/>
+          <ImageView
+              android:layout_width="10dp"
+              android:layout_height="10dp"
+              android:background="#30e6df"
+              android:id="@+id/medicine_blue"
+              android:layout_marginTop="20dp"
+              android:layout_below="@id/shopping_green"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignStart="@+id/textView3"
+              android:layout_alignTop="@id/medicine_blue"
+              android:text="Medicine"
+              android:id="@+id/textView4"/>
+          <ImageView
+          android:layout_width="10dp"
+          android:layout_height="10dp"
+          android:background="#e6304e"
+          android:id="@+id/miscellaneous_pink"
+          android:layout_marginTop="20dp"
+          android:layout_below="@id/medicine_blue"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignStart="@+id/textView4"
+              android:layout_alignTop="@id/miscellaneous_pink"
+              android:text="Miscellaneous"
+              android:id="@+id/textView5"/>
+          <ImageView
+              android:layout_width="10dp"
+              android:layout_height="10dp"
+              android:background="#ef9f1e"
+              android:id="@+id/fixed_orange"
+              android:layout_marginTop="20dp"
+              android:layout_below="@id/miscellaneous_pink"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignStart="@+id/textView5"
+              android:layout_alignTop="@id/fixed_orange"
+              android:text="Fixed Bills" />
+
+      </RelativeLayout>
+
+
+
     <RelativeLayout
         android:id="@+id/monthly_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/pie_chart_layout"
+        android:layout_below="@+id/pie_color_match"
         android:layout_marginTop="16dp"
         android:background="#fff"
         android:padding="20dp">
@@ -158,15 +272,37 @@
     android:id="@+id/move_to_fixed_spends"
     android:layout_below="@id/pledgelayout"
     android:layout_marginTop="17dp"
-    android:background="#fff">
+    android:background="#fff"
+    android:padding="10dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/check_fixed_button">
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="20dp"
-      android:text="Tell us about your fixed spends so you won't have to scan them every month."
-      android:textStyle="italic"
-      android:textColor="#4879a4"
+      android:text="Fixed Bills"
+      android:textSize="25dp"
       android:id="@+id/move_to_fixed_spends_text"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tell us about your fixed monthly expenses. We will notify you every month so you'll never forget."
+        android:textColor="#4879a4"
+        android:layout_below="@id/move_to_fixed_spends_text"
+        android:layout_marginTop="15dp"
+        />
+    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#6bbe56"
+        android:text="Check my Fixed Bills"
+        android:textColor="#fff"
+        android:id="@+id/check_fixed_button"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
