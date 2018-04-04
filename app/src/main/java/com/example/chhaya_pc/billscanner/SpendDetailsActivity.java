@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,9 @@ public class SpendDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spend_details);
+
+        getSupportActionBar().setTitle("Expenditure Overview");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         yearlyLayout=(RelativeLayout)findViewById(R.id.yearly_spends_layout);
         monthlyLayout=(RelativeLayout)findViewById(R.id.monthly_spends_layout);
@@ -115,4 +119,14 @@ public class SpendDetailsActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.text.ParseException;
@@ -26,6 +27,10 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_details);
+
+        getSupportActionBar().setTitle("Expenditure Details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.monthlysalesList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -107,5 +112,14 @@ public class MonthlyDetailsActivity extends AppCompatActivity {
 
        }
        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

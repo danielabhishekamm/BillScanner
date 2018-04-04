@@ -3,6 +3,7 @@ package com.example.chhaya_pc.billscanner;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ public class SearchByDateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_by_date);
+        getSupportActionBar().setTitle("Select Start Date");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         datePickerStart = (DatePicker)findViewById(R.id.date_picker_start);
         datePickerEnd = (DatePicker)findViewById(R.id.date_picker_end);
         next =(TextView)findViewById(R.id.date_next);
@@ -41,6 +44,7 @@ public class SearchByDateActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(datePickerStart.getVisibility()==View.VISIBLE) {
+                    getSupportActionBar().setTitle("Select End Date");
                     startMonth = datePickerStart.getMonth();
                     startDayOfMonth = datePickerStart.getDayOfMonth();
                     startYear = datePickerStart.getYear();
@@ -79,14 +83,17 @@ public class SearchByDateActivity extends AppCompatActivity {
 
                     startActivity(intent);
                     finish();
-
                 }
-
-
             }
         });
+    }
 
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

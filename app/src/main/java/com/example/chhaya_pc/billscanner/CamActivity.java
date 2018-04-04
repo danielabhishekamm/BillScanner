@@ -6,11 +6,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
@@ -25,7 +28,7 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import java.io.IOException;
 import java.util.List;
 
-public class CamActivity extends Activity{
+public class CamActivity extends AppCompatActivity{
 
     SurfaceView cameraView;
     TextView textView;
@@ -39,6 +42,9 @@ public class CamActivity extends Activity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cam_layout);
+
+        getSupportActionBar().setTitle("Scan Bill");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         cameraView = (SurfaceView) findViewById(R.id.surface_view);
         textView = (TextView) findViewById(R.id.text_view);
@@ -171,5 +177,13 @@ public class CamActivity extends Activity{
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
