@@ -1,4 +1,4 @@
-package com.example.chhaya_pc.billscanner;
+package com.chhaya_pc.billscanner;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

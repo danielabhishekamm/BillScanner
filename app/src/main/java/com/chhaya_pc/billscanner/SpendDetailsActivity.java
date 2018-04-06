@@ -1,4 +1,4 @@
-package com.example.chhaya_pc.billscanner;
+package com.chhaya_pc.billscanner;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

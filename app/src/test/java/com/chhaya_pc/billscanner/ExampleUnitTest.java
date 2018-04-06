@@ -1,4 +1,4 @@
-package com.example.chhaya_pc.billscanner;
+package com.chhaya_pc.billscanner;
 
 import org.junit.Test;
 
